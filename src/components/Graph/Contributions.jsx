@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addDays, parse } from 'date-fns'
+import { addDays, parse, startOfWeek } from 'date-fns'
 import format from 'date-fns/format'
 
 const Contributions = ({ state }) => {
@@ -14,8 +14,10 @@ const Contributions = ({ state }) => {
   const startDate = sortedDates[0]
   const endDate = sortedDates[sortedDates.length - 1]
 
+  const startOfFirstWeek = startOfWeek(startDate, { weekStartsOn: 1 }) // 1 означает понедельник
+
   const dateRange = []
-  let currentDate = startDate
+  let currentDate = startOfFirstWeek
 
   while (currentDate <= endDate) {
     const formattedDate = format(currentDate, 'EEEE, MMMM dd, yyyy')
@@ -47,7 +49,9 @@ const Contributions = ({ state }) => {
           <div
             onClick={() => handleDateClick(date)}
             key={date}
-            className={`${contributionClass} ${selectedDate === date ? 'selected' : ''}`}
+            className={`${contributionClass} ${
+              selectedDate === date ? 'selected' : ''
+            }`}
           >
             {selectedDate === date && (
               <div className="contributionColor">

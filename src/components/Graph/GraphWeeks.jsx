@@ -1,7 +1,7 @@
 import React from 'react'
 
 const GraphWeeks = () => {
-  const weeks = ['Пн.', 'Ср.', 'Пт.']
+  const weeks = ['Пн', 'Ср', 'Пт']
   return (
     <ul className="weeks">
       {weeks.map((week) => (
