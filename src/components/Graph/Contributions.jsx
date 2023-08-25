@@ -32,7 +32,10 @@ const Contributions = ({ state }) => {
   const contributions = (
     <>
       {dateRange.map((date) => {
-        const count = state[format(parse(date, 'EEEE, MMMM dd, yyyy', new Date()), 'yyyy-MM-dd')] || 0
+        const count =
+          state[
+            format(parse(date, 'EEEE, MMMM dd, yyyy', new Date()), 'yyyy-MM-dd')
+          ] || 0
         let contributionClass = 'contribution'
 
         if (count >= 30) {
@@ -55,7 +58,11 @@ const Contributions = ({ state }) => {
           >
             {selectedDate === date && (
               <div className="contributionColor">
-                <p>{count} contributions</p>
+                {count === 0 ? (
+                  <p>No contributions</p>
+                ) : (
+                  <p>{count} contributions</p>
+                )}
                 <span>{date}</span>
               </div>
             )}
